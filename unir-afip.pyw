@@ -1,6 +1,6 @@
-# Unir archivos de AFIP - unir-afip.pyw (interfaz gráfica
+# Unir archivos de AFIP - unir-afip.pyw
 from tkinter import *
-import os.path
+from os import path
 
 raiz=Tk()
 raiz.title("Unir archivos de ventas y alicuotas - AFIP")
@@ -15,7 +15,7 @@ etiqueta1.place(x=50,y=30)
 etiqueta4=Label(frame1, text="OK", font=("Arial",14))
 etiqueta4.place(x=200,y=30)
 
-etiqueta2=Label(frame1, text="Alícuotas.txt", font=("Arial",14))
+etiqueta2=Label(frame1, text="Alicuotas.txt", font=("Arial",14))
 etiqueta2.place(x=50,y=60)
 etiqueta5=Label(frame1, text="OK", font=("Arial",14))
 etiqueta5.place(x=200,y=60)
@@ -25,28 +25,28 @@ etiqueta3.place(x=50,y=90)
 etiqueta6=Label(frame1, text="OK", font=("Arial",14))
 etiqueta6.place(x=200,y=90)
 
-etiqueta7=Label(frame1, text="", font=("Arial",14))
-etiqueta7.place(x=50,y=120)
+etiqueta7=Label(frame1, text="", font=("Arial",14), fg="red")
+etiqueta7.place(x=50,y=150)
 
 def unir():
-	# Proyecto Unir para archivos de ventas y alícuotas de AFIP
+	# Proyecto Unir para archivos de ventas y alicuotas de AFIP
 	try:
-	    if os.path.isfile('ventas.txt') and os.path.isfile('alicuotas.txt'):
-	    	fichaventas = open('ventas.txt','r')
-	    	fichaalicuotas = open('alicuotas.txt','r')
-	    	fichasalida = open('salida2.txt','w')
+	    #if os.path.isfile('ventas.txt') and os.path.isfile('alicuotas.txt'):
+	    fichaventas = open('ventas.txt','r')
+	    fichaalicuotas = open('alicuotas.txt','r')
+	    fichasalida = open('salida2.txt','w')
 	except:
-	    etiqueta7.text("No están todos los archivos")
+	    etiqueta7.config(text="No estan todos los archivos")
 	else:
 	    ceros='000000000000000'+'0004'+'000000000000000'
 	    salida=''
 	    sal2=fichaalicuotas.readline()
 	    sal3=''
-	    #lee desde la posición 8 y toma 20 caracteres - lee el número de factura
+	    #lee desde la posicion 8 y toma 20 caracteres - lee el numero de factura
 	    for sal1 in fichaventas:
 	    	salida=sal1[:-2]
 	    	while sal2[8:28] == sal1[16:36]:
-	    		if sal2[43:47]=='0005': # revisa el número de alícuota si es 0005 o 0004
+	    		if sal2[43:47]=='0005': # revisa el numero de alicuota si es 0005 o 0004
 	    			if len(sal3)<30:
 	    				sal3=ceros+sal2[28:62]
 	    			else:
@@ -64,12 +64,12 @@ def unir():
 	    	sal3=''
 	    
 	    if os.path.isfile('salida2.txt'):
-	    	print('\nMisión cumplida!!')
+	    	print('\nMision cumplida!!')
 	    else:
 	    	print('\nNo se pudo crear el archivo de salida!!')
 	    fichaventas.close()
 	    fichaalicuotas.close()
-	fichasalida.close()
+	    fichasalida.close()
 
 boton1=Button(frame1, text="Unir archivos", font=("Arial",14), command=unir)
 boton1.place(x=250,y=190)

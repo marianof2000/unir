@@ -1,4 +1,4 @@
-# Unir archivos de AFIP - unir-afip.pyw
+# Unir archivos de AFIP - unir-afip.pyw (interfaz gráfica
 from tkinter import *
 import os.path
 

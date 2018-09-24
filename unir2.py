@@ -17,8 +17,7 @@ else:
     for sal1 in fichaventas:
     	salida=sal1[:-2]
     	while sal2[8:28] == sal1[16:36]:
-    		numalic=sal2[43:47]
-    		if numalic=='0005':
+    		if sal2[43:47]=='0005': # revisa el número de alícuota si es 0005 o 0004
     			if len(sal3)<30:
     				sal3=ceros+sal2[28:62]
     			else:

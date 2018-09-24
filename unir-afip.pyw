@@ -1,6 +1,6 @@
 # Unir archivos de AFIP - unir-afip.pyw
 from tkinter import *
-from os import path
+import os.path
 
 raiz=Tk()
 raiz.title("Unir archivos de ventas y alicuotas - AFIP")
@@ -32,9 +32,9 @@ def unir():
 	# Proyecto Unir para archivos de ventas y alicuotas de AFIP
 	try:
 	    #if os.path.isfile('ventas.txt') and os.path.isfile('alicuotas.txt'):
-	    fichaventas = open('ventas.txt','r')
-	    fichaalicuotas = open('alicuotas.txt','r')
-	    fichasalida = open('salida2.txt','w')
+	    fichaventas = open('VENTAS.txt','r')
+	    fichaalicuotas = open('ALICUOTAS.txt','r')
+	    fichasalida = open('salida.txt','w')
 	except:
 	    etiqueta7.config(text="No estan todos los archivos")
 	else:
@@ -63,10 +63,10 @@ def unir():
 	    		fichasalida.write(salida)
 	    	sal3=''
 	    
-	    if os.path.isfile('salida2.txt'):
-	    	print('\nMision cumplida!!')
+	    if os.path.isfile('salida.txt'):
+	    	etiqueta7.config(text="Mision cumplida!!")
 	    else:
-	    	print('\nNo se pudo crear el archivo de salida!!')
+	    	etiqueta7.config(text="No se pudo crear el archivo de salida!!")
 	    fichaventas.close()
 	    fichaalicuotas.close()
 	    fichasalida.close()

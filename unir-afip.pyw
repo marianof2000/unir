@@ -3,7 +3,7 @@ from tkinter import *
 import os.path
 
 raiz=Tk()
-raiz.title("Unir archivos de ventas y alicuotas - AFIP")
+raiz.title("Unir archivos de ventas y alícuotas - AFIP")
 raiz.resizable(0,0)
 raiz.geometry("420x250")
 
@@ -12,17 +12,17 @@ frame1.pack()
 
 etiqueta1=Label(frame1, text="Ventas.txt", font=("Arial",14))
 etiqueta1.place(x=50,y=30)
-etiqueta4=Label(frame1, text="OK", font=("Arial",14))
+etiqueta4=Label(frame1, text="", font=("Arial",14))
 etiqueta4.place(x=200,y=30)
 
 etiqueta2=Label(frame1, text="Alicuotas.txt", font=("Arial",14))
 etiqueta2.place(x=50,y=60)
-etiqueta5=Label(frame1, text="OK", font=("Arial",14))
+etiqueta5=Label(frame1, text="", font=("Arial",14))
 etiqueta5.place(x=200,y=60)
 
 etiqueta3=Label(frame1, text="Salida.txt", font=("Arial",14))
 etiqueta3.place(x=50,y=90)
-etiqueta6=Label(frame1, text="OK", font=("Arial",14))
+etiqueta6=Label(frame1, text="", font=("Arial",14))
 etiqueta6.place(x=200,y=90)
 
 etiqueta7=Label(frame1, text="", font=("Arial",14), fg="red")
@@ -35,9 +35,19 @@ def unir():
 	    fichaventas = open('VENTAS.txt','r')
 	    fichaalicuotas = open('ALICUOTAS.txt','r')
 	    fichasalida = open('salida.txt','w')
-	except:
-	    etiqueta7.config(text="No estan todos los archivos")
+	except FileNotFoundError:
+	    etiqueta7.config(text="No están todos los archivos")
+	    if not os.path.isfile('ventas.txt'):
+	    	etiqueta4.config(text="Error", fg="red")
+	    else:
+	    	etiqueta4.config(text="OK")
+	    if not os.path.isfile('alicuotas.txt'):
+	    	etiqueta5.config(text="Error", fg="red")
+	    else:
+	    	etiqueta5.config(text="OK")
 	else:
+	    etiqueta4.config(text="OK")
+	    etiqueta5.config(text="OK")
 	    ceros='000000000000000'+'0004'+'000000000000000'
 	    salida=''
 	    sal2=fichaalicuotas.readline()
@@ -64,9 +74,12 @@ def unir():
 	    	sal3=''
 	    
 	    if os.path.isfile('salida.txt'):
-	    	etiqueta7.config(text="Mision cumplida!!")
+	    	etiqueta7.config(text="Misión cumplida!!")
+	    	etiqueta6.config(text="OK")
 	    else:
 	    	etiqueta7.config(text="No se pudo crear el archivo de salida!!")
+	    	etiqueta6.config(text="Error", fg="red")
+
 	    fichaventas.close()
 	    fichaalicuotas.close()
 	    fichasalida.close()
